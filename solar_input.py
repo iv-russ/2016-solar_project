@@ -86,11 +86,19 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     """
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            l =obj.type+' '+str(obj.R)+' '+obj.color+' '+str(obj.m)+' '+str(obj.x)+' '+str(obj.y)+' '+ str(obj.Vx)+' '+str(obj.Vy) + '\n'
+            l = obj.type+' '+str(obj.R)+' '+obj.color+' '+str(obj.m)+' '+str(obj.x)+' '+str(obj.y)+' '+ str(obj.Vx)+' '+str(obj.Vy) + '\n'
             out_file.write(l)
             
-            
-# FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
+
+def collect_statistics(body, time, statistics_list):
+    distance = (body.x**2 + body.y**2)**0.5
+    velocity = (body.Vy ** 2 + body.Vx ** 2)**0.5
+    statistics_list.append([distance, velocity, time])
+
+
+def write_data_to_file(output_filename, statistics_list):
+    with open(output_filename, 'w') as out_file:
+        out_file.write('No data avaliable') #Fixme Нужно записать список в файл
 
 
 if __name__ == "__main__":
