@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Nov  9 11:31:23 2020
-
-@author: student
-"""
-
 # coding: utf-8
 # license: GPLv3
 
