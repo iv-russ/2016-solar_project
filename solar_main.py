@@ -25,6 +25,8 @@ time_step = None
 space_objects = []
 """Список космических объектов."""
 
+statistics = []
+
 
 def execution():
     """Функция исполнения -- выполняется циклически, вызывая обработку всех небесных тел,
@@ -34,8 +36,11 @@ def execution():
     """
     global physical_time
     global displayed_time
+    global statistics
     recalculate_space_objects_positions(space_objects, time_step.get())
     for body in space_objects:
+        if(body.type == 'planet'):
+            collect_statistics(body, physical_time, statistics)
         update_object_position(space, body)
     physical_time += time_step.get()
     displayed_time.set("%.1f" % physical_time + " seconds gone")
@@ -62,10 +67,12 @@ def stop_execution():
     Останавливает циклическое исполнение функции execution.
     """
     global perform_execution
+    global statistics
     perform_execution = False
     start_button['text'] = "Start"
     start_button['command'] = start_execution
     print('Paused execution.')
+    write_data_to_file('stats.txt', statistics)
 
 
 def open_file_dialog():
