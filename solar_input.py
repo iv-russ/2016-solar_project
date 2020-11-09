@@ -52,6 +52,7 @@ def parse_star_parameters(line, star):
     star.Vx = float(par[6])
     star.Vy = float(par[7])
 
+    
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
     Предполагается такая строка:
@@ -73,6 +74,7 @@ def parse_planet_parameters(line, planet):
     planet.Vx = float(par[6])
     planet.Vy = float(par[7])
 
+    
 def write_space_objects_data_to_file(output_filename, space_objects):
     """Сохраняет данные о космических объектах в файл.
     Строки должны иметь следующий формат:
@@ -85,8 +87,9 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
             print(out_file, "%s %d %s %f %f %f %f" % (obj.type, obj.R, obj.color, obj.x, obj.y, obj.Vx, obj.Vy))
-
+            
 # FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
+
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
