@@ -57,7 +57,6 @@ def start_execution():
     perform_execution = True
     start_button['text'] = "Pause"
     start_button['command'] = stop_execution
-
     execution()
     print('Started execution...')
 
@@ -72,7 +71,8 @@ def stop_execution():
     start_button['text'] = "Start"
     start_button['command'] = start_execution
     print('Paused execution.')
-    write_data_to_file('stats.txt', statistics)
+    write_data_to_file('stats.txt', statistics, space_objects)
+    draw_graph_from_file('stats.txt')
 
 
 def open_file_dialog():
