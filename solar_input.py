@@ -2,6 +2,7 @@
 # license: GPLv3
 
 from solar_objects import Star, Planet
+import matplotlib.pyplot as plt
 
 
 def read_space_objects_data_from_file(input_filename):
@@ -91,15 +92,41 @@ def write_space_objects_data_to_file(output_filename, space_objects):
             
 
 def collect_statistics(body, time, statistics_list):
-    distance = (body.x**2 + body.y**2)**0.5
-    velocity = (body.Vy ** 2 + body.Vx ** 2)**0.5
-    statistics_list.append([distance, velocity, time])
+    distance = int((body.x**2 + body.y**2)**0.5)
+    velocity = int((body.Vy ** 2 + body.Vx ** 2)**0.5)
+    statistics_list.append([distance, velocity, int(time)])
 
 
-def write_data_to_file(output_filename, statistics_list):
-    with open(output_filename, 'w') as out_file:
-        out_file.write('No data avaliable') #Fixme Нужно записать список в файл
+def write_data_to_file(output_filename, statistics_list, objects):
+    number_of_bodies = 0
+    S = ''
+    for body in objects:
+        if(body.type == 'planet'):
+            number_of_bodies += 1
+    if(number_of_bodies == 1):
+        for i in statistics_list:
+            for j in i:
+                S += str(j) + ' '
+        with open(output_filename, 'w') as out_file:
+            out_file.write(S) 
+    else:
+        pass
 
+def draw_graph_from_file(output_filename):
+    with open(output_filename, 'r') as out_file:
+        Lst = list(out_file)[0].split()
+        dist_list = Lst[0::3]
+        vel_list = Lst[1::3]
+        time_list = Lst[2::3]
+        dist_list = list(map(int, dist_list))
+        time_list = list(map(int, time_list))
+        vel_list = list(map(int, vel_list))
+        plt.plot(time_list, vel_list)
+        plt.show()
+        plt.plot(time_list, dist_list)
+        plt.show()
+        plt.plot(vel_list, dist_list)
+        plt.show()
 
 if __name__ == "__main__":
     print("This module is not for direct call!")
